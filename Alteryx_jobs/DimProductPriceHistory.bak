@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.4">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="138" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <CachedCosmeticName />
+          <File RecordLimit="" FileFormat="23">aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,
+	Production.ProductListPriceHistory.StartDate,
+	Production.ProductListPriceHistory.EndDate,
+	Production.ProductListPriceHistory.ListPrice,
+	Production.ProductListPriceHistory.ModifiedDate,
+	Row_Number() 
+over 
+	(
+	partition by Production.ProductListPriceHistory.ProductID 
+	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate
+	) SCD_Version 
+from Production.ProductListPriceHistory</File>
+          <FormatSpecificOptions>
+            <PreSQL />
+            <PreSQLOnConfig>True</PreSQLOnConfig>
+            <NoProgress>True</NoProgress>
+            <CacheData>False</CacheData>
+            <TableStyle>Quoted</TableStyle>
+            <ReadUncommitted>False</ReadUncommitted>
+            <PostSQL />
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>aka:AdventureWorks
+Query=select Production.ProductLis...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="ProductID" source="File: aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,&#xA;	Production.ProductListPriceHistory.StartDate,&#xA;	Production.ProductListPriceHistory.EndDate,&#xA;	Production.ProductListPriceHistory.ListPrice,&#xA;	Production.ProductListPriceHistory.ModifiedDate,&#xA;	Row_Number() &#xA;over &#xA;	(&#xA;	partition by Production.ProductListPriceHistory.ProductID &#xA;	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate&#xA;	) SCD_Version &#xA;from Production.ProductListPriceHistory" type="Int32" />
+            <Field name="StartDate" source="File: aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,&#xA;	Production.ProductListPriceHistory.StartDate,&#xA;	Production.ProductListPriceHistory.EndDate,&#xA;	Production.ProductListPriceHistory.ListPrice,&#xA;	Production.ProductListPriceHistory.ModifiedDate,&#xA;	Row_Number() &#xA;over &#xA;	(&#xA;	partition by Production.ProductListPriceHistory.ProductID &#xA;	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate&#xA;	) SCD_Version &#xA;from Production.ProductListPriceHistory" type="DateTime" />
+            <Field name="EndDate" source="File: aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,&#xA;	Production.ProductListPriceHistory.StartDate,&#xA;	Production.ProductListPriceHistory.EndDate,&#xA;	Production.ProductListPriceHistory.ListPrice,&#xA;	Production.ProductListPriceHistory.ModifiedDate,&#xA;	Row_Number() &#xA;over &#xA;	(&#xA;	partition by Production.ProductListPriceHistory.ProductID &#xA;	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate&#xA;	) SCD_Version &#xA;from Production.ProductListPriceHistory" type="DateTime" />
+            <Field name="ListPrice" scale="4" size="21" source="File: aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,&#xA;	Production.ProductListPriceHistory.StartDate,&#xA;	Production.ProductListPriceHistory.EndDate,&#xA;	Production.ProductListPriceHistory.ListPrice,&#xA;	Production.ProductListPriceHistory.ModifiedDate,&#xA;	Row_Number() &#xA;over &#xA;	(&#xA;	partition by Production.ProductListPriceHistory.ProductID &#xA;	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate&#xA;	) SCD_Version &#xA;from Production.ProductListPriceHistory" type="FixedDecimal" />
+            <Field name="ModifiedDate" source="File: aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,&#xA;	Production.ProductListPriceHistory.StartDate,&#xA;	Production.ProductListPriceHistory.EndDate,&#xA;	Production.ProductListPriceHistory.ListPrice,&#xA;	Production.ProductListPriceHistory.ModifiedDate,&#xA;	Row_Number() &#xA;over &#xA;	(&#xA;	partition by Production.ProductListPriceHistory.ProductID &#xA;	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate&#xA;	) SCD_Version &#xA;from Production.ProductListPriceHistory" type="DateTime" />
+            <Field name="SCD_Version" source="File: aka:AdventureWorks|||select Production.ProductListPriceHistory.ProductID,&#xA;	Production.ProductListPriceHistory.StartDate,&#xA;	Production.ProductListPriceHistory.EndDate,&#xA;	Production.ProductListPriceHistory.ListPrice,&#xA;	Production.ProductListPriceHistory.ModifiedDate,&#xA;	Row_Number() &#xA;over &#xA;	(&#xA;	partition by Production.ProductListPriceHistory.ProductID &#xA;	order by Production.ProductListPriceHistory.ProductID, Production.ProductListPriceHistory.EndDate&#xA;	) SCD_Version &#xA;from Production.ProductListPriceHistory" type="Int64" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="150" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords>47153B24A25FF4E3F4A5F33E03FA86248434FD962</Passwords>
+          <File RecordLimit="" FileFormat="23">odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimproducts_purchased.Product_Durable_SK,
+	dimproducts_purchased.ProductID 
+from dimproducts_purchased</File>
+          <FormatSpecificOptions>
+            <PreSQL />
+            <ReadCentroids>False</ReadCentroids>
+            <PreSQLOnConfig>True</PreSQLOnConfig>
+            <NoProgress>True</NoProgress>
+            <CacheData>False</CacheData>
+            <TableStyle>Quoted</TableStyle>
+            <ReadUncommitted>False</ReadUncommitted>
+            <PostSQL />
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DSN=MySQL
+Query=select dimproducts_purchased...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Product_Durable_SK" source="File: odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimproducts_purchased.Product_Durable_SK,&#xA;	dimproducts_purchased.ProductID &#xA;from dimproducts_purchased" type="Int32" />
+            <Field name="ProductID" source="File: odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimproducts_purchased.Product_Durable_SK,&#xA;	dimproducts_purchased.ProductID &#xA;from dimproducts_purchased" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="282" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="ProductID" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="ProductID" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_StartDate" selected="True" rename="scd_start" input="Left_" />
+                <SelectField field="Left_EndDate" selected="True" rename="scd_end" input="Left_" />
+                <SelectField field="Right_ProductID" selected="True" rename="Right_ProductID" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="402" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="DateTimeToday()" field="DI_Create_Date" size="16777216" type="V_String" />
+            <FormulaField expression="DateTimeToday()" field="DI_Modified_Date" size="16777216" type="V_String" />
+            <FormulaField expression="1" field="SOR_ID" size="16777216" type="V_String" />
+            <FormulaField expression="DateTimeToday()" field="SOR_LoadDate" size="16777216" type="V_String" />
+            <FormulaField expression="DateTimeToday()" field="SOR_UpdateDate" size="16777216" type="V_String" />
+            <FormulaField expression="[Engine.WorkflowFileName]" field="JobID" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF [scd_end] = Null() then 1 else 0 endif" field="scd_Active" size="4" type="Int32" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DI_Create_Date = DateTimeToday()
+DI_Modified_Date = DateTimeToday()
+SOR_ID = 1
+S...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
+        <Position x="510" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FieldName>ProductPriceSK</FieldName>
+          <StartValue>1</StartValue>
+          <FieldType>Int32</FieldType>
+          <FieldSize>6</FieldSize>
+          <Position>0</Position>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="642" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="23">odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||dimproductpricehistory</File>
+          <Passwords>47153B24A25FF4E3F4A5F33E03FA86248434FD962</Passwords>
+          <FormatSpecificOptions>
+            <SpatialObjSize>8000</SpatialObjSize>
+            <TransactionSize>10000</TransactionSize>
+            <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+            <PostSQL />
+            <TableStyle>Quoted</TableStyle>
+            <AppendMap>
+              <AppendMapping mode="Custom">
+                <Field Source="ProductPriceSK" Dest="ProductPriceHistorySK" />
+                <Field Source="scd_start" Dest="scd_start" />
+                <Field Source="scd_end" Dest="scd_end" />
+                <Field Source="ListPrice" Dest="ListPrice" />
+                <Field Source="ModifiedDate" Dest="ModifiedDate" />
+                <Field Source="SCD_Version" Dest="scd_Version" />
+                <Field Source="Product_Durable_SK" Dest="ProductPurchasedSK" />
+                <Field Source="DI_Create_Date" Dest="DI_Create_Date" />
+                <Field Source="DI_Modified_Date" Dest="DI_Modified_Date" />
+                <Field Source="SOR_ID" Dest="SOR_ID" />
+                <Field Source="JobID" Dest="DI_Job_ID" />
+                <Field Source="scd_Active" Dest="scd_Active" />
+              </AppendMapping>
+            </AppendMap>
+            <PreSQL />
+            <TransactionMessages>False</TransactionMessages>
+            <OutputOption>Overwrite</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DSN=MySQL
+Query=dimproductpricehistory</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Join" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>DimProductPriceHistory</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

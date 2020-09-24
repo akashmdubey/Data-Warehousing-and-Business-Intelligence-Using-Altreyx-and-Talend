@@ -1,0 +1,5 @@
+﻿SOR_ID,SOR_NAME,SOR_TYPE,SOR_FILETYPE
+1,SQL Server,Database,
+2,MySQL,Database,
+3,Oracle,Database,
+4,CSV,File,CSV

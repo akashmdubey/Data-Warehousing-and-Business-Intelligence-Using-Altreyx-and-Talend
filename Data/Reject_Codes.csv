@@ -1,0 +1,8 @@
+﻿DI_REJECT_SK,DI_REJECTCODE,DI_REJECTREASON,DI_REJECTDESCRIPTION
+1,1,PRODUCTPURCHASEDSK is null,Catching Inner Join Rejects when ProductPurchasedSK is null
+2,2,SCRAPREASONSK is null,Catching Inner Join Rejects when ScrapReasonSK is null
+3,3,LOCATIONSK is null,Catching Inner Join Rejects when LocationSK is null
+4,4,WORKORDERSK is null,Catching Inner Join Rejects when WorkOrderSK is null
+5,5,VENDORSK is null,Catching Inner Join Rejects when VendorSK is null
+6,6,EMPLOYEESK is null,Catching Inner Join Rejects when EmployeeSK is null
+7,7,SHIPMETHODSK is null,Catching Inner Join Rejects when ShipMethodSK is null

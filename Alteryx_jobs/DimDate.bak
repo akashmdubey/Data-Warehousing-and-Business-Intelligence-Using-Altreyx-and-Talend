@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.4">
+  <Nodes>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="90" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="0">C:\Users\jaysh\Downloads\DimDate_Input.csv</File>
+          <FormatSpecificOptions>
+            <CodePage>28591</CodePage>
+            <Delimeter>,</Delimeter>
+            <IgnoreErrors>False</IgnoreErrors>
+            <FieldLen>254</FieldLen>
+            <AllowShareWrite>False</AllowShareWrite>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DimDate_Input.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="DateSK" size="254" source="File: C:\Users\jaysh\Downloads\DimDate_Input.csv" type="V_WString" />
+            <Field name="DateAK" size="254" source="File: C:\Users\jaysh\Downloads\DimDate_Input.csv" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="210" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="ToNumber(DateTimeFormat([DateAK],&quot;%w&quot;))" field="DayNumberOfWeek" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeFormat([DateAK],&quot;%A&quot;)" field="DayNameOfWeek" size="1073741823" type="V_WString" />
+            <FormulaField expression="LEFT([DayNameOfWeek],3)" field="DayNameOfWeekAbbr" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeDay([DateAK])" field="DayNumberOfMonth" size="1073741823" type="V_WString" />
+            <FormulaField expression="ToNumber(DateTimeFormat([DateAK],'%U'))+1" field="WeekNumberOfYear" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeFormat([DateAK],&quot;%B&quot;)" field="MonthName" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeFormat([DateAK],&quot;%b&quot;)" field="MonthNameAbbr" size="1073741823" type="V_WString" />
+            <FormulaField expression="ToNumber(DateTimeFormat([DateAK],&quot;%m&quot;))&#xA;" field="MonthNumberOfYear" size="1073741823" type="V_WString" />
+            <FormulaField expression="Left([DateAK],4)+' Q'+&#xA;&#xA;IIF(Substring([DateAK],5,2) IN ('01','02','03'),'1',&#xA;IIF(Substring([DateAK],5,2) IN ('04','05','06'),'2',&#xA;IIF(Substring([DateAK],5,2) IN ('07','08','09'),'3',&#xA;IIF(Substring([DateAK],5,2) IN ('10','11','12'),'4',&#xA;Null()&#xA;&#xA;))))" field="Month Number" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeFormat([DateAK],&quot;%Y&quot;)" field="Year" size="1073741823" type="V_WString" />
+            <FormulaField expression="ToNumber(DateTimeFormat([DateAK],'%j'))&#xA;" field="DayNumberOfYear" size="1073741823" type="V_WString" />
+            <FormulaField expression="4" field="SOR_ID" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeToday()" field="DI_Create_Date" size="1073741823" type="V_WString" />
+            <FormulaField expression="DateTimeToday()" field="DI_Modified_Date" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DayNumberOfWeek = ToNumber(DateTimeFormat([DateAK],"%w"))
+DayNameOfWeek = DateTi...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="318" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\jaysh\AppData\Local\Temp\Engine_44896_89b333a779264d718d405e4945f0af9d_\Engine_17072_6b1ab45282864d30a6760913e762e76f_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>DimDateUpdate(Project)</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

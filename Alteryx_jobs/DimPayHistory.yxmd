@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.4">
+  <Nodes>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="258" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="DateTimeToday()" field="DI_Create_Date" size="16777216" type="V_String" />
+            <FormulaField expression="DateTimeToday()" field="DI_Modified_Date" size="16777216" type="V_String" />
+            <FormulaField expression="2" field="SOR_ID" size="16777216" type="V_String" />
+            <FormulaField expression="DateTimeToday()" field="SOR_LoadDate" size="16777216" type="V_String" />
+            <FormulaField expression="DateTimeToday()" field="SOR_UpdateDate" size="16777216" type="V_String" />
+            <FormulaField expression="[Engine.WorkflowFileName]" field="JobID" size="1073741823" type="V_WString" />
+            <FormulaField expression="[RATECHANGEDATE]" field="scd_start" size="10" type="Date" />
+            <FormulaField expression="IF [SCD_END] = Null() then 1 else 0 endif" field="scd_Active" size="4" type="Int32" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DI_Create_Date = DateTimeToday()
+DI_Modified_Date = DateTimeToday()
+SOR_ID = 2
+S...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.RecordID.RecordID">
+        <Position x="366" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FieldName>PayHistorySK</FieldName>
+          <StartValue>1</StartValue>
+          <FieldType>Int32</FieldType>
+          <FieldSize>6</FieldSize>
+          <Position>0</Position>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRecordID" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="30" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords>47153B24A25FF4E3F4A5F33E03FA86248434FD962</Passwords>
+          <File RecordLimit="" FileFormat="23">odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimemployee.EmployeeSK,
+	dimemployee.BuisnessEntityID,
+	dimemployee.EmployeeID 
+from dimemployee</File>
+          <FormatSpecificOptions>
+            <PreSQL />
+            <ReadCentroids>False</ReadCentroids>
+            <PreSQLOnConfig>True</PreSQLOnConfig>
+            <NoProgress>True</NoProgress>
+            <CacheData>False</CacheData>
+            <TableStyle>Quoted</TableStyle>
+            <ReadUncommitted>False</ReadUncommitted>
+            <PostSQL />
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DSN=MySQL
+Query=select dimemployee.EmployeeS...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="EmployeeSK" source="File: odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimemployee.EmployeeSK,&#xA;	dimemployee.BuisnessEntityID,&#xA;	dimemployee.EmployeeID &#xA;from dimemployee" type="Int32" />
+            <Field name="BuisnessEntityID" source="File: odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimemployee.EmployeeSK,&#xA;	dimemployee.BuisnessEntityID,&#xA;	dimemployee.EmployeeID &#xA;from dimemployee" type="Int64" />
+            <Field name="EmployeeID" source="File: odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||select dimemployee.EmployeeSK,&#xA;	dimemployee.BuisnessEntityID,&#xA;	dimemployee.EmployeeID &#xA;from dimemployee" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="30" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <CachedCosmeticName />
+          <File RecordLimit="" FileFormat="17">aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,
+	EMPLOYEEPAYHISTORY.RATE,
+	EMPLOYEEPAYHISTORY.RATECHANGEDATE,
+	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,
+	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) 
+over 
+	(
+	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID 
+	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE
+	) SCD_END, ROW_NUMBER() 
+over 
+	(
+	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID 
+	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE
+	) SCD_Version 
+from EMPLOYEEPAYHISTORY</File>
+          <FormatSpecificOptions>
+            <PreSQLOnConfig>True</PreSQLOnConfig>
+            <ReadCentroids>False</ReadCentroids>
+            <TableStyle>Quoted</TableStyle>
+            <NoProgress>False</NoProgress>
+            <CacheData>False</CacheData>
+            <PostSQL />
+            <PreSQL />
+            <ForceSqlWcharSupport>False</ForceSqlWcharSupport>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>aka:aw2017neu_hr
+Query=select EMPLOYEEPAYHISTORY.PA...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="PAYFREQUENCY" source="File: aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,&#xA;	EMPLOYEEPAYHISTORY.RATE,&#xA;	EMPLOYEEPAYHISTORY.RATECHANGEDATE,&#xA;	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,&#xA;	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_END, ROW_NUMBER() &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_Version &#xA;from EMPLOYEEPAYHISTORY" type="Int64" />
+            <Field name="RATE" source="File: aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,&#xA;	EMPLOYEEPAYHISTORY.RATE,&#xA;	EMPLOYEEPAYHISTORY.RATECHANGEDATE,&#xA;	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,&#xA;	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_END, ROW_NUMBER() &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_Version &#xA;from EMPLOYEEPAYHISTORY" type="Double" />
+            <Field name="RATECHANGEDATE" source="File: aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,&#xA;	EMPLOYEEPAYHISTORY.RATE,&#xA;	EMPLOYEEPAYHISTORY.RATECHANGEDATE,&#xA;	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,&#xA;	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_END, ROW_NUMBER() &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_Version &#xA;from EMPLOYEEPAYHISTORY" type="DateTime" />
+            <Field name="BUSINESSENTITYID" source="File: aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,&#xA;	EMPLOYEEPAYHISTORY.RATE,&#xA;	EMPLOYEEPAYHISTORY.RATECHANGEDATE,&#xA;	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,&#xA;	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_END, ROW_NUMBER() &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_Version &#xA;from EMPLOYEEPAYHISTORY" type="Int64" />
+            <Field name="SCD_END" source="File: aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,&#xA;	EMPLOYEEPAYHISTORY.RATE,&#xA;	EMPLOYEEPAYHISTORY.RATECHANGEDATE,&#xA;	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,&#xA;	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_END, ROW_NUMBER() &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_Version &#xA;from EMPLOYEEPAYHISTORY" type="DateTime" />
+            <Field name="SCD_VERSION" source="File: aka:aw2017neu_hr|||select EMPLOYEEPAYHISTORY.PAYFREQUENCY,&#xA;	EMPLOYEEPAYHISTORY.RATE,&#xA;	EMPLOYEEPAYHISTORY.RATECHANGEDATE,&#xA;	EMPLOYEEPAYHISTORY.BUSINESSENTITYID,&#xA;	LEAD(EMPLOYEEPAYHISTORY.RATECHANGEDATE) &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_END, ROW_NUMBER() &#xA;over &#xA;	(&#xA;	partition by EMPLOYEEPAYHISTORY.BUSINESSENTITYID &#xA;	order by EMPLOYEEPAYHISTORY.BUSINESSENTITYID, EMPLOYEEPAYHISTORY.RATECHANGEDATE&#xA;	) SCD_Version &#xA;from EMPLOYEEPAYHISTORY" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="162" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="BuisnessEntityID" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="BUSINESSENTITYID" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_EmployeeSK" selected="True" input="Left_" />
+                <SelectField field="Left_BuisnessEntityID" selected="True" input="Left_" />
+                <SelectField field="Left_EmployeeID" selected="True" input="Left_" />
+                <SelectField field="Right_PAYFREQUENCY" selected="True" input="Right_" />
+                <SelectField field="Right_RATE" selected="True" input="Right_" />
+                <SelectField field="Right_RATECHANGEDATE" selected="True" input="Right_" />
+                <SelectField field="Right_SCD_END" selected="True" input="Right_" />
+                <SelectField field="Right_SCD_VERSION" selected="True" input="Right_" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="486" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="23">odbc:DSN=MySQL;UID=info7370;PWD=__EncPwd1__|||dimpayhistory</File>
+          <Passwords>47153B24A25FF4E3F4A5F33E03FA86248434FD962</Passwords>
+          <FormatSpecificOptions>
+            <SpatialObjSize>8000</SpatialObjSize>
+            <TransactionSize>10000</TransactionSize>
+            <IgnoreDropTableSQLErrors>False</IgnoreDropTableSQLErrors>
+            <PostSQL />
+            <TableStyle>Quoted</TableStyle>
+            <AppendMap>
+              <AppendMapping mode="Custom">
+                <Field Source="PayHistorySK" Dest="PayHistorySK" />
+                <Field Source="EmployeeSK" Dest="EmployeeSK" />
+                <Field Source="PAYFREQUENCY" Dest="PayFrequency" />
+                <Field Source="RATE" Dest="Rate" />
+                <Field Source="SCD_END" Dest="scd_end" />
+                <Field Source="SCD_VERSION" Dest="scd_Version" />
+                <Field Source="DI_Create_Date" Dest="DI_Create_Date" />
+                <Field Source="DI_Modified_Date" Dest="DI_Modified_Date" />
+                <Field Source="SOR_ID" Dest="SOR_ID" />
+                <Field Source="JobID" Dest="DI_Job_ID" />
+                <Field Source="scd_start" Dest="scd_start" />
+                <Field Source="scd_Active" Dest="scd_Active" />
+              </AppendMapping>
+            </AppendMap>
+            <PreSQL />
+            <TransactionMessages>False</TransactionMessages>
+            <OutputOption>Overwrite</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>DSN=MySQL
+Query=dimpayhistory</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="15" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="15" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Join" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>DimPayHistory</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
